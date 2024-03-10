@@ -18,6 +18,23 @@ Problem description and (if any) background of the algorithms.
 
 Description (pseudo-code preferred) of all the algorithms involved for solving the problem, including specifications of main data structures.
 
+Pseudocode example:
+
+#pseudocode(
+  no-number,
+  [*input:* integers $a$ and $b$],
+  no-number,
+  [*output:* greatest common divisor of $a$ and $b$],
+  [*while* $a != b$ *do*], ind,
+    [*if* $a > b$ *then*], ind,
+      $a <- a - b$, ded,
+    [*else*], ind,
+      $b <- b - a$, ded,
+    [*end*], ded,
+  [*end*],
+  [*return* $a$]
+)
+
 == Step One
 == Step Two
 == Step Three // Auto-numbering is supported

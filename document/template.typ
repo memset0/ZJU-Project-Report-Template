@@ -1,6 +1,9 @@
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
 // Go ahead and customize it to your liking!
+
+#import "@preview/lovelace:0.2.0": *
+
 #let project(title: "", authors: (), logo: none, date: none, body) = {
   // Set the document's basic properties.
   set document(author: authors, title: title)
