@@ -1,61 +1,63 @@
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
 // Go ahead and customize it to your liking!
-#let project(title: "", authors: (), logo: none, date: none, body) = {
+#let project(
+  course: "Fundamentals of Data Structures",
+  title: "",
+  title_size: 3em,
+  cover_image_padding: 1em,
+  cover_image_size: 50%,
+  semester: "2023-2024 Spring & Summer",
+  author: none,
+  date: none,
+  cover_comments: none,
+  cover_comments_size: 1.35em,
+  body
+) = {
   // Set the document's basic properties.
-  set document(author: authors, title: title)
+  set document(author: (author), title: title)
   set page(numbering: "1", number-align: center)
   set text(font: "New Computer Modern", lang: "en", size: 12pt)
   show math.equation: set text(weight: 400)
 
-  // Set paragraph spacing.
   show par: set block(above: 1.2em, below: 1.2em)
 
   set par(leading: 0.75em)
 
-  // Title page.
-  // The page can contain a logo if you pass one with `logo: "logo.png"`.
+  // Cover Page
   v(0.6fr)
-  if logo != none {
-    align(right, image(logo, width: 26%))
-  }
-  v(9.6fr)
 
   box(
     width: 100%,
     align(center)[
       #text(2em, weight: 900)[
-        Fundamentals of Data Structures
+        #course
       ]
 
-      #text(3em, weight: 700)[
+      #text(title_size, weight: 700)[
         #title
       ]
 
-      #v(1em)
-      #image("./images/ZJU-Logo.png", width: 50%)
-      #v(2em)
+      #v(cover_image_padding)
+      #image("./images/ZJU-Logo.png", width: cover_image_size)
+      #v(cover_image_padding)
 
-      #text(1.35em)[
-        Date: #date
+      #if (cover_comments == none) [
+        #text(cover_comments_size)[
+          #v(1em)
+          #if (author != none) [
+            Author: #author
+          ]
 
-        2023-2024 Spring & Summer Semester
+          Date: #date
+
+          #semester Semester
+        ]
+      ] else [
+        #cover_comments
       ]
-
-      #v(12em)
     ]
   )
-
-  // Author information.
-  // pad(
-  //   top: 0.7em,
-  //   right: 20%,
-  //   grid(
-  //     columns: (1fr,) * calc.min(3, authors.len()),
-  //     gutter: 1em,
-  //     ..authors.map(author => align(start, strong(author))),
-  //   ),
-  // )
 
   v(2.4fr)
   pagebreak()

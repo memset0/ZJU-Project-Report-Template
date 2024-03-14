@@ -1,13 +1,10 @@
 #import "template.typ": *
 
-// Take a look at the file `template.typ` in the file panel
-// to customize this template and discover how it works.
 #show: project.with(
   title: "Projects 1: ???",
-  date: "2024/03/04",
-  authors: (
-    "Anonymous",
-  ),
+  date: "2024/03/14",
+  author: "memset0",
+	// cover_comments: [something], // If cover_comments is assigned, it will be used as the cover's original comments
 )
 
 = *Chapter 1*: Introduction
