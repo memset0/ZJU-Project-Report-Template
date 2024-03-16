@@ -23,7 +23,7 @@
 }
 
 #let project(
-  theme: "ds",
+  theme: "project",
   course: "<course>",
   title: "<title>",
   title_size: 3em,
@@ -53,7 +53,7 @@
     if (language == none) {
       language = "cn"
     }
-  } else if (theme == "ds") {
+  } else if (theme == "project") {
     if (cover_image_size == none) {
       cover_image_size = 50%
     }
@@ -125,7 +125,7 @@
     ])
     v(2fr)
     pagebreak()
-  } else if (theme == "ds") {
+  } else if (theme == "project") {
     v(1fr)
     box(
       width: 100%,

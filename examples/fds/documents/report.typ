@@ -1,6 +1,7 @@
 #import "../../../template.typ": *
 
 #show: project.with(
+  theme: "project",
   course: "Fundamentals of Data Structures",
   title: "Projects 1: ???",
   date: "2024/03/14",

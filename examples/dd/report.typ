@@ -1,6 +1,7 @@
 #import "../../template.typ": *
 
 #show: project.with(
+  theme: "lab",
   course: "数字逻辑设计",
   title: "数字逻辑设计 实验报告",
   semester: "2023-2024 Spring & Summer",
@@ -10,7 +11,6 @@
   college: "计算机科学与技术学院",
   major: "计算机科学与技术",
   teacher: "某老师",
-  theme: "lab",
 )
 
 #lab_header(name: "Lab1: 第一次实验", place: "紫金港 东x-xxx", date: "20xx年xx月xx日")
