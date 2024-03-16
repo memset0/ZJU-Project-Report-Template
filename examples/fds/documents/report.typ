@@ -1,10 +1,11 @@
-#import "template.typ": *
+#import "../../../template.typ": *
 
 #show: project.with(
+  course: "Fundamentals of Data Structures",
   title: "Projects 1: ???",
   date: "2024/03/14",
   author: "memset0",
-	// cover_comments: [something], // If cover_comments is assigned, it will be used as the cover's original comments
+  semester: "2023-2024 Spring & Summer",
 )
 
 = *Chapter 1*: Introduction
@@ -26,12 +27,14 @@ Table of test cases. Each test case usually consists of a brief description of t
 
 #table(
   columns: (1fr, 1fr),
+  align: top,
+  inset: 10pt,
   [`Sample Input`], [`Sample Output`],
   [
-    #importCode("../code/sample.in", lang: "txt")
+    #codex(read("../code/sample.in"), lang: "txt", border: false)
   ],
   [
-    #importCode("../code/sample.out", lang: "txt")
+    #codex(read("../code/sample.out"), lang: "txt", border: false)
   ]
 )
 
@@ -45,7 +48,7 @@ At least 30% of the lines must be commented. Otherwise the code will NOT be eval
 
 File sol.c:
 
-#importCode("../code/sol.c")
+#codex(read("../code/sol.c"), lang: "c")
 // use `importCode` function to read code from a file
 
 = *Declaration*
