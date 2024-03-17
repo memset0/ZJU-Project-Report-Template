@@ -2,6 +2,8 @@
 
 Typst is a new text markup language, considered the successor of LaTeX. This is yet another Zhejiang University project report template written in Typst, mainly designed for the course "Fundamentals of Data Structures (211C0020)" and "Digital Logic Design (211C0060)".
 
+**Requirement**: Typst version >= 0.11. (VS Code with the latest version of [Typst Preview](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview) extension installed is recommanded.)
+
 **Reminder**: Due to requirements of some specific courses, disclosing personal information is prohibited and will be punished. So use this project at your own risk.
 
 ## Configuration
@@ -10,11 +12,11 @@ Typst is a new text markup language, considered the successor of LaTeX. This is 
 
 Currently, I have provided two themes, corresponding to common lab reports and project reports in ZJU's Computer Science courses.
 
-|          `theme: project`           |            `theme: lab`            |
-| :---------------------------------: | :--------------------------------: |
-| ![](./screenshots/fds_report_1.png) | ![](./screenshots/dd_report_1.png) |
-| ![](./screenshots/fds_report_2.png) | ![](./screenshots/dd_report_2.png) |
-| ![](./screenshots/fds_report_3.png) | ![](./screenshots/dd_report_3.png) |
+|                `theme: project`                 |                 `theme: lab`                  |
+| :---------------------------------------------: | :-------------------------------------------: |
+| ![fds_report_1](./screenshots/fds_report_1.png) | ![dd_report_1](./screenshots/dd_report_1.png) |
+| ![fds_report_2](./screenshots/fds_report_2.png) | ![dd_report_2](./screenshots/dd_report_2.png) |
+| ![fds_report_3](./screenshots/fds_report_3.png) | ![dd_report_3](./screenshots/dd_report_3.png) |
 
 ### Fonts
 
