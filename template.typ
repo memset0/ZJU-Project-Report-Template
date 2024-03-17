@@ -1,9 +1,12 @@
 #import "@preview/tablex:0.0.8": tablex, colspanx, rowspanx, hlinex, vlinex, cellx
+#import "@preview/showybox:2.0.1": showybox
 
 #let state_course = state("course", none)
 #let state_author = state("author", none)
 #let state_school_id = state("school_id", none)
 #let state_date = state("date", none)
+#let state_theme = state("theme", none)
+#let state_block_theme = state("block_theme", none)
 
 #let _underlined_cell(content, color: black) = {
   tablex(
@@ -24,6 +27,7 @@
 
 #let project(
   theme: "project",
+  block_theme: "default",
   course: "<course>",
   title: "<title>",
   title_size: 3em,
@@ -49,9 +53,6 @@
   if (theme == "lab") {
     if (cover_image_size == none) {
       cover_image_size = 48%
-    }
-    if (language == none) {
-      language = "cn"
     }
   } else if (theme == "project") {
     if (cover_image_size == none) {
@@ -89,6 +90,8 @@
   state_author.update(author)
   state_school_id.update(school_id)
   state_date.update(date)
+  state_theme.update(theme)
+  state_block_theme.update(block_theme)
 
   // Cover Page
   if (theme == "lab") {
@@ -161,6 +164,8 @@
     )
     v(4fr)
     pagebreak()
+  } else if (theme == "nocover") {
+    // no cover page
   } else {
     set text(fill: red, size: 3em, weight: 900)
     align(center)[Theme not found!]
@@ -333,44 +338,141 @@
   )
 }
 
-#let blockx(it, name: "", color: red, inset: 11pt) = block(
-  below: 1em, stroke: 0.5pt + color, radius: 3pt,
-  width: 100%, inset: inset
-)[
-  #place(
-    top + left,
-    dy: -6pt - inset, // Account for inset of block
-    dx: 8pt - inset,
-    block(fill: white, inset: 2pt)[
-			#set text(font: "Noto Sans", fill: color)
-			#strong[#name]
-		]
-  )
-  #set text(fill: color)
-  #set par(first-line-indent: 0em)
-  #it
-]
+#let blockx(
+  it,
+  name: "",
+  color: red,
+  theme: none,
+) = {
+  context {
+    let _theme = theme
+    if (_theme == none) {
+      _theme = state_block_theme.get()
+    }
+    if (_theme == "default") {
+      let _inset = 0.8em
+      let _color = color.darken(5%)
+      v(0.2em)
+      block(
+        below: 1em,
+        stroke: 0.5pt + _color,
+        radius: 3pt,
+        width: 100%,
+        inset: _inset,
+      )[
+        #place(
+          top + left,
+          dy: -6pt - _inset, // Account for inset of block
+          dx: 8pt - _inset,
+          block(fill: white, inset: 2pt)[
+            #set text(font: "Noto Sans", fill: _color)
+            #name
+          ]
+        )
+        #set text(fill: _color)
+        #set par(first-line-indent: 0em)
+        #it
+      ]
+    } else if (_theme == "boxed") {
+      showybox(
+        title: name,
+        frame: (
+          border-color: color,
+          title-color: color.lighten(20%),
+          body-color: color.lighten(95%),
+          footer-color: color.lighten(80%)
+        ),
+        it,
+      )
+    } else if (_theme == "float") {
+      showybox(
+        title-style: (
+          boxed-style: (
+            anchor: (
+              x: center,
+              y: horizon
+            ),
+            radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
+          )
+        ),
+        frame: (
+          title-color: color.darken(5%),
+          body-color: color.lighten(95%),
+          footer-color: color.lighten(60%),
+          border-color: color.darken(20%),
+          radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
+        ),
+        title: name,
+        [
+          #it
+          #v(0.25em)
+        ],
+      )
+    } else if (_theme == "thickness") {
+      showybox(
+        title-style: (
+          color: color.darken(20%),
+          sep-thickness: 0pt,
+          align: center
+        ),
+        frame: (
+          title-color: color.lighten(85%),
+          border-color: color.darken(20%),
+          thickness: (left: 1pt),
+          radius: 0pt
+        ),
+        title: name,
+        it,
+      )
+    } else if (_theme == "dashed") {
+      showybox(
+        title: name,
+        frame: (
+          border-color: color,
+          title-color: color,
+          radius: 0pt,
+          thickness: 1pt,
+          body-inset: 1em,
+          dash: "densely-dash-dotted"
+        ),
+        it,
+      )
+    } else {
+      block(
+        width: 100%,
+        stroke: 0.5pt + red,
+        inset: 1em,
+        radius: 5pt,
+        align(center)[
+          #set text(fill: red, size: 1.5em)
+          Unknown block theme!
+        ]
+      )
+    }
+  }
+}
 
-#let example(it) = blockx(it, name: "Example", color: gray.darken(60%))
-#let proof(it) = blockx(it, name: "Proof", color: rgb(120, 120, 120))
-#let abstract(it) = blockx(it, name: "Abstract", color: rgb(0, 133, 143))
-#let summary(it) = blockx(it, name: "Summary", color: rgb(0, 133, 143))
-#let info(it) = blockx(it, name: "Info", color: rgb(68, 115, 218))
-#let note(it) = blockx(it, name: "Note", color: rgb(68, 115, 218))
-#let tip(it) = blockx(it, name: "Tip", color: rgb(0, 133, 91))
-#let hint(it) = blockx(it, name: "Hint", color: rgb(0, 133, 91))
-#let success(it) = blockx(it, name: "Success", color: rgb(62, 138, 0))
-#let important(it) = blockx(it, name: "Important", color: rgb(62, 138, 0))
-#let help(it) = blockx(it, name: "Help", color: rgb(153, 110, 36))
-#let warning(it) = blockx(it, name: "Warning", color: rgb(184, 95, 0))
-#let attention(it) = blockx(it, name: "Attention", color: rgb(216, 58, 49))
-#let caution(it) = blockx(it, name: "Caution", color: rgb(216, 58, 49))
-#let failure(it) = blockx(it, name: "Failure", color: rgb(216, 58, 49))
-#let danger(it) = blockx(it, name: "Danger", color: rgb(216, 58, 49))
-#let error(it) = blockx(it, name: "Error", color: rgb(216, 58, 49))
-#let bug(it) = blockx(it, name: "Bug", color: rgb(204, 51, 153))
-#let quote(it) = blockx(it, name: "Quote", color: rgb(132, 90, 231))
-#let cite(it) = blockx(it, name: "Cite", color: rgb(132, 90, 231))
-#let experiment(it) = blockx(it, name: "Experiment", color: rgb(132, 90, 231))
-#let question(it) = blockx(it, name: "Question", color: rgb(132, 90, 231))
-#let analysis(it) = blockx(it, name: "Analysis", color: rgb(0, 133, 91))
+
+#let    example(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Example") }, color: gray.darken(60%))
+#let      proof(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Proof") }, color: rgb(120, 120, 120))
+#let   abstract(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Abstract") }, color: rgb(0, 133, 143))
+#let    summary(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Summary") }, color: rgb(0, 133, 143))
+#let       info(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Info") }, color: rgb(68, 115, 218))
+#let       note(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Note") }, color: rgb(68, 115, 218))
+#let        tip(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Tip") }, color: rgb(0, 133, 91))
+#let       hint(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Hint") }, color: rgb(0, 133, 91))
+#let    success(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Success") }, color: rgb(62, 138, 0))
+#let  important(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Important") }, color: rgb(62, 138, 0))
+#let       help(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Help") }, color: rgb(153, 110, 36))
+#let    warning(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Warning") }, color: rgb(184, 95, 0))
+#let  attention(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Attention") }, color: rgb(216, 58, 49))
+#let    caution(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Caution") }, color: rgb(216, 58, 49))
+#let    failure(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Failure") }, color: rgb(216, 58, 49))
+#let     danger(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Danger") }, color: rgb(216, 58, 49))
+#let      error(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Error") }, color: rgb(216, 58, 49))
+#let        bug(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Bug") }, color: rgb(204, 51, 153))
+#let      quote(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Quote") }, color: rgb(132, 90, 231))
+#let       cite(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Cite") }, color: rgb(132, 90, 231))
+#let experiment(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Experiment") }, color: rgb(132, 90, 231))
+#let   question(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Question") }, color: rgb(132, 90, 231))
+#let   analysis(it, name: none) = blockx(it, name: if (name != none) { name } else { strong("Analysis") }, color: rgb(0, 133, 91))
