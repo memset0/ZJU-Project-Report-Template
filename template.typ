@@ -25,6 +25,11 @@
   )
 }
 
+#let fakebold(content) = {
+  set text(stroke: 0.02857em) // https://gist.github.com/csimide/09b3f41e838d5c9fc688cc28d613229f
+  content
+}
+
 #let project(
   theme: "project",
   block_theme: "default",
@@ -98,8 +103,8 @@
     v(1fr)
     align(center, image("./images/ZJU-Banner.png", width: cover_image_size))
     align(center)[
-      #set text(size: 26pt, weight: 700)
-      本科实验报告
+      #set text(size: 26pt)
+      #fakebold[本科实验报告]
     ]
     v(2fr)
     align(center, box(width: 75%)[
@@ -264,11 +269,11 @@
 ) = {
   pagebreak(weak: true)
   align(center)[
-    #set text(size: 1.5em, weight: 700)
-    浙江大学实验报告
+    #set text(size: 1.5em)
+    #fakebold[浙江大学实验报告]
   ]
   tablex(
-    columns: (1fr, 0.3fr, 1.7fr, 1fr, 1fr, 1fr),
+    columns: (1fr, 0.32fr, 1.68fr, 1fr, 1fr, 1fr),
     align: center + horizon,
     stroke: 0pt,
     inset: 1pt,
