@@ -324,6 +324,44 @@
   )
 }
 
+#let table3( // 三线表
+	..args,
+	inset: 0.5em,
+	stroke: 0.5pt,
+	align: center + horizon,
+	columns: (1fr)
+) = {
+	tablex(
+		columns: (1fr),
+		inset: 0pt,
+		stroke: 0pt,
+		map-hlines: h => {
+			if (h.y > 0) {
+				(..h, stroke: (stroke * 2) + black)
+			} else {
+				h
+			}
+		},
+		tablex(
+			..args,
+			inset: inset,
+			stroke: stroke,
+			align: align,
+			columns: columns,
+			map-hlines: h => {
+				if (h.y == 0) {
+					(..h, stroke: (stroke * 2) + black)
+				} else if (h.y == 1) {
+					(..h, stroke: stroke + black)
+				} else {
+					(..h, stroke: 0pt)
+				}
+			},
+			auto-vlines: false,
+		)
+	)
+}
+
 #let figurex(
   img,
   caption,

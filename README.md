@@ -39,4 +39,4 @@ We provided a series of block functions to offer an experience that is similar t
 
 Some alias we have provided is as follows: `example`, `proof`, `abstract`, `summary`, `info`, `note`, `tip`, `hint`, `success`, `important`, `help`, `warning`, `attention`, `caution`, `failure`, `danger`, `error`, `bug`, `quote`, `cite`, `experiment`, `question`, `analysis`.
 
-![](./screenshots/themed_blocks.png)
+![themed blocks](./screenshots/themed_blocks.png)
