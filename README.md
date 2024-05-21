@@ -1,4 +1,4 @@
-# ZJU-Project-Report-Template
+# ZJU-Project-Report-Template ![License](https://img.shields.io/badge/license-MIT-blue)
 
 Typst is a new text markup language, considered the successor of LaTeX. This is yet another Zhejiang University project report template written in Typst, mainly designed for the course "Fundamentals of Data Structures (211C0020)" and "Digital Logic Design (211C0060)".
 
@@ -40,3 +40,7 @@ We provided a series of block functions to offer an experience that is similar t
 Some alias we have provided is as follows: `example`, `proof`, `abstract`, `summary`, `info`, `note`, `tip`, `hint`, `success`, `important`, `help`, `warning`, `attention`, `caution`, `failure`, `danger`, `error`, `bug`, `quote`, `cite`, `experiment`, `question`, `analysis`.
 
 ![themed blocks](./screenshots/themed_blocks.png)
+
+## Contributing
+
+If you want to submit code to this project, the formatter [typstyle](https://github.com/Enter-tainer/typstyle) is recommended. Please do not contribute unformatted code.
