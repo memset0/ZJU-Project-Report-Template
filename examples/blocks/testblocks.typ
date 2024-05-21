@@ -12,7 +12,7 @@
 
   #note(name: [Lagrange Inversion Theorem])[
     Given a power serie $F(x)$ and another power series $G(x)$ related by $F(G(x))=G(F(x))=x$, then the nth coefficient of $F(x)$ is
-    $ [x^n] F(x) = 1/n [x^(-1)] 1/(G^n (x)). $
+    $ [x^n] F(x) = 1 / n [x^(-1)] 1 / (G^n (x)). $
   ]
 
   #v(1em)
@@ -23,7 +23,6 @@
 #render("float")
 #render("thickness")
 #render("dashed")
-
 
 #state_block_theme.update("rounded")
 

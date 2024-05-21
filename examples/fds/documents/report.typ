@@ -30,13 +30,14 @@ Table of test cases. Each test case usually consists of a brief description of t
   columns: (1fr, 1fr),
   align: top,
   inset: 10pt,
-  [`Sample Input`], [`Sample Output`],
+  [`Sample Input`],
+  [`Sample Output`],
   [
     #codex(read("../code/sample.in"), lang: "txt", border: false)
   ],
   [
     #codex(read("../code/sample.out"), lang: "txt", border: false)
-  ]
+  ],
 )
 
 = *Chapter 4*: Analysis and Comments
