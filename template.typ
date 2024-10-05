@@ -275,6 +275,16 @@
       }
     })
 
+    show heading.where(level: 1): it => block(
+      width: 100%,
+      {
+        set align(center)
+        set text(size: 1.2em)
+        it.body
+        v(0.6em)
+      },
+    )
+
     body
   } else {
     set heading(numbering: (..args) => {
