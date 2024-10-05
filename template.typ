@@ -39,10 +39,12 @@
   cover_image_padding: 1em,
   cover_image_size: none,
   semester: "<semester>",
+  name: none,
   author: none,
   school_id: none,
   date: none,
   college: none,
+  place: none,
   teacher: none,
   major: none,
   cover_comments: none,
@@ -146,6 +148,43 @@
       #fakebold[本科实验报告]
     ]
     v(2fr)
+    let rows = ()
+    if (course != none) {
+      rows.push("课程名称")
+      rows.push(course)
+    }
+    if (name != none) {
+      rows.push("实验名称")
+      rows.push(name)
+    }
+    if (author != none) {
+      rows.push([姓$space.quad space.quad$名])
+      rows.push(author)
+    }
+    if (school_id != none) {
+      rows.push([学$space.quad space.quad$号])
+      rows.push(school_id)
+    }
+    if (college != none) {
+      rows.push([学$space.quad space.quad$院])
+      rows.push(college)
+    }
+    if (major != none) {
+      rows.push([专$space.quad space.quad$业])
+      rows.push(major)
+    }
+    if (place != none) {
+      rows.push([实验地点])
+      rows.push(place)
+    }
+    if (teacher != none) {
+      rows.push([指导教师])
+      rows.push(teacher)
+    }
+    if (date != none) {
+      rows.push([报告日期])
+      rows.push(date)
+    }
     align(
       center,
       box(width: 75%)[
@@ -163,25 +202,13 @@
             _underlined_cell(cell.content, color: black)
           }
         },
-        [课程名称],
-        course,
-        [姓 名],
-        author,
-        [学 号],
-        school_id,
-        [学 院],
-        college,
-        [专 业],
-        major,
-        [指导教师],
-        teacher,
-        [报告日期],
-        date,
+        ..rows,
       )
       ],
     )
     v(2fr)
     pagebreak()
+
   } else if (theme == "project") {
     v(1fr)
     box(
@@ -218,8 +245,10 @@
     )
     v(4fr)
     pagebreak()
+
   } else if (theme == "nocover") {
     // no cover page
+
   } else {
     set text(fill: red, size: 3em, weight: 900)
     align(center)[Theme not found!]
@@ -232,17 +261,33 @@
   }
 
   set par(justify: true)
-  set heading(numbering: (..args) => {
-    let nums = args.pos()
-    if nums.len() == 1 {
-      return none
-    } else {
-      return numbering("1.1)", ..nums)
-    }
-  })
   set table(align: center + horizon, stroke: 0.5pt)
 
-  body
+  if (theme == "lab") {
+    set heading(numbering: (..args) => {
+      let nums = args.pos()
+      if nums.len() == 1 {
+        return none
+      } else if nums.len() == 2 {
+        return numbering("一、", ..nums.slice(1))
+      } else {
+        return numbering("1.1)", ..nums.slice(1))
+      }
+    })
+
+    body
+  } else {
+    set heading(numbering: (..args) => {
+      let nums = args.pos()
+      if nums.len() == 1 {
+        return none
+      } else {
+        return numbering("1.1)", ..nums)
+      }
+    })
+
+    body
+  }
 }
 
 #let codex(code, lang: none, size: 1em, border: true) = {

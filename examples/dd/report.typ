@@ -2,8 +2,8 @@
 
 #show: project.with(
   theme: "lab",
-  course: "数字逻辑设计",
   title: "数字逻辑设计 实验报告",
+  course: "数字逻辑设计",
   semester: "2023-2024 Spring & Summer",
   author: "某学生",
   school_id: "1234567890",
