@@ -425,6 +425,63 @@
   )
 }
 
+#let lab_header_2(
+  major: none,
+  author: none,
+  school_id: none,
+  date: none,
+  course: none,
+  teacher: none,
+  grade: none,
+  name: none,
+) = {
+  
+    align(center)[
+      #grid(columns: 3, column-gutter: (-15pt, 20pt),[
+        #pad(y: -4pt)[]
+        #image("./images/ZJU-Banner.png", width: 75%)
+      ],[
+        #text(size: -10pt)[]  \ #text(size: 30pt, stroke: 1pt)[实验报告]
+      ], [
+        #align(left)[
+          #text(size: 1em)[
+            专业：#major\
+            姓名：#author \
+            学号：#school_id \
+            日期：#date\
+          ]
+        ]
+      ])
+    ]
+     
+  tablex(
+    columns: (1.3fr, 2fr, 1.3fr, 1fr, 1fr, 0.5fr),
+    align: left,
+    stroke: 0pt,
+    inset: 1pt,
+    _underlined_cell("课程名称：", color: white),
+    colspanx(1, _underlined_cell(
+      if course == none {
+        state_course.display()
+      } else {
+        course
+      }
+    )),
+    _underlined_cell("指导老师：", color: white),
+    colspanx(1, _underlined_cell(
+      teacher
+    )),
+    _underlined_cell("成绩：", color: white),
+    colspanx(1, _underlined_cell(
+      grade
+    )), 
+    _underlined_cell("实验名称：", color: white),
+    colspanx(4, _underlined_cell(
+      name
+    )), (), (), (),
+  )
+}
+
 #let table3( // 三线表
   ..args,
   inset: 0.5em,
