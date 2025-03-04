@@ -1,4 +1,4 @@
-#import "@preview/tablex:0.0.8": tablex, colspanx, rowspanx, hlinex, vlinex, cellx
+#import "@preview/tablex:0.0.9": tablex, colspanx, rowspanx, hlinex, vlinex, cellx
 #import "@preview/showybox:2.0.1": showybox
 
 #let state_course = state("course", none)
@@ -20,7 +20,7 @@
         h
       }
     },
-    columns: (1fr),
+    columns: 1fr,
     content,
   )
 }
@@ -127,9 +127,7 @@
   show raw: set text(font: font_mono)
   show math.equation: set text(weight: 400)
 
-  show par: set block(above: 1.2em, below: 1.2em)
-
-  set par(leading: 0.75em)
+  set par(spacing: 1.2em, leading: 0.75em)
 
   // Update global state
   state_course.update(course)
@@ -190,25 +188,24 @@
       box(width: 75%)[
         #set text(size: 1.2em)
         #tablex(
-        columns: (6.5em + 5pt, 1fr),
-        align: center + horizon,
-        stroke: 0pt,
-        // stroke: 0.5pt + red, // this line is just for testing
-        inset: 1pt,
-        map-cells: cell => {
-          if (cell.x == 0) {
-            _underlined_cell([#cell.content#"："], color: white)
-          } else {
-            _underlined_cell(cell.content, color: black)
-          }
-        },
-        ..rows,
-      )
+          columns: (6.5em + 5pt, 1fr),
+          align: center + horizon,
+          stroke: 0pt,
+          // stroke: 0.5pt + red, // this line is just for testing
+          inset: 1pt,
+          map-cells: cell => {
+            if (cell.x == 0) {
+              _underlined_cell([#cell.content#"："], color: white)
+            } else {
+              _underlined_cell(cell.content, color: black)
+            }
+          },
+          ..rows,
+        )
       ],
     )
     v(2fr)
     pagebreak()
-
   } else if (theme == "project") {
     v(1fr)
     box(
@@ -245,10 +242,8 @@
     )
     v(4fr)
     pagebreak()
-
   } else if (theme == "nocover") {
     // no cover page
-
   } else {
     set text(fill: red, size: 3em, weight: 900)
     align(center)[Theme not found!]
@@ -264,16 +259,18 @@
   set table(align: center + horizon, stroke: 0.5pt)
 
   if (theme == "lab") {
-    set heading(numbering: (..args) => {
-      let nums = args.pos()
-      if nums.len() == 1 {
-        return none
-      } else if nums.len() == 2 {
-        return numbering("一、", ..nums.slice(1))
-      } else {
-        return numbering("1.1)", ..nums.slice(1))
-      }
-    })
+    set heading(
+      numbering: (..args) => {
+        let nums = args.pos()
+        if nums.len() == 1 {
+          return none
+        } else if nums.len() == 2 {
+          return numbering("一、", ..nums.slice(1))
+        } else {
+          return numbering("1.1)", ..nums.slice(1))
+        }
+      },
+    )
 
     show heading.where(level: 1): it => block(
       width: 100%,
@@ -287,14 +284,16 @@
 
     body
   } else {
-    set heading(numbering: (..args) => {
-      let nums = args.pos()
-      if nums.len() == 1 {
-        return none
-      } else {
-        return numbering("1.1)", ..nums)
-      }
-    })
+    set heading(
+      numbering: (..args) => {
+        let nums = args.pos()
+        if nums.len() == 1 {
+          return none
+        } else {
+          return numbering("1.1)", ..nums)
+        }
+      },
+    )
 
     body
   }
@@ -374,7 +373,7 @@
     colspanx(
       2,
       _underlined_cell(if course == none {
-        state_course.display()
+        context state_course.get()
       } else {
         course
       }),
@@ -393,7 +392,7 @@
     colspanx(
       2,
       _underlined_cell(if author == none {
-        state_author.display()
+        context state_author.get()
       } else {
         author
       }),
@@ -403,7 +402,7 @@
     colspanx(
       2,
       _underlined_cell(if school_id == none {
-        state_school_id.display()
+        context state_school_id.get()
       } else {
         school_id
       }),
@@ -416,7 +415,7 @@
     colspanx(
       2,
       _underlined_cell(if date == none {
-        state_date.display()
+        context state_date.get()
       } else {
         date
       }),
@@ -435,14 +434,18 @@
   grade: none,
   name: none,
 ) = {
-  
-    align(center)[
-      #grid(columns: 3, column-gutter: (-15pt, 20pt),[
+  align(center)[
+    #grid(
+      columns: 3,
+      column-gutter: (-15pt, 20pt),
+      [
         #pad(y: -4pt)[]
         #image("./images/ZJU-Banner.png", width: 75%)
-      ],[
-        #text(size: -10pt)[]  \ #text(size: 30pt, stroke: 1pt)[实验报告]
-      ], [
+      ],
+      [
+        #text(size: -10pt)[] \ #text(size: 30pt, stroke: 1pt)[实验报告]
+      ],
+      [
         #align(left)[
           #text(size: 1em)[
             专业：#major\
@@ -451,46 +454,46 @@
             日期：#date\
           ]
         ]
-      ])
-    ]
-     
+      ],
+    )
+  ]
+
   tablex(
     columns: (1.3fr, 2fr, 1.3fr, 1fr, 1fr, 0.5fr),
     align: left,
     stroke: 0pt,
     inset: 1pt,
     _underlined_cell("课程名称：", color: white),
-    colspanx(1, _underlined_cell(
-      if course == none {
-        state_course.display()
+    colspanx(
+      1,
+      _underlined_cell(if course == none {
+        context state_course.get()
       } else {
         course
-      }
-    )),
+      }),
+    ),
     _underlined_cell("指导老师：", color: white),
-    colspanx(1, _underlined_cell(
-      teacher
-    )),
+    colspanx(1, _underlined_cell(teacher)),
     _underlined_cell("成绩：", color: white),
-    colspanx(1, _underlined_cell(
-      grade
-    )), 
+    colspanx(1, _underlined_cell(grade)),
     _underlined_cell("实验名称：", color: white),
-    colspanx(4, _underlined_cell(
-      name
-    )), (), (), (),
+    colspanx(4, _underlined_cell(name)),
+    (),
+    (),
+    (),
   )
 }
 
-#let table3( // 三线表
+#let table3(
+  // 三线表
   ..args,
   inset: 0.5em,
   stroke: 0.5pt,
   align: center + horizon,
-  columns: (1fr),
+  columns: 1fr,
 ) = {
   tablex(
-    columns: (1fr),
+    columns: 1fr,
     inset: 0pt,
     stroke: 0pt,
     map-hlines: h => {
