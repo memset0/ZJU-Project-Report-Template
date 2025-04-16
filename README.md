@@ -1,10 +1,10 @@
 # ZJU-Project-Report-Template ![License](https://img.shields.io/badge/license-MIT-blue)
 
-Typst is a new text markup language, considered the successor of LaTeX. This is yet another Zhejiang University project report template written in Typst, mainly designed for the course "Fundamentals of Data Structures (211C0020)" and "Digital Logic Design (211C0060)".
+[English](./README.md) | [简体中文](./README.zh_CN.md)
 
-**Requirement**: Typst version >= 0.11. (VS Code with the latest version of [Typst Preview](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview) extension installed is recommanded.)
+Typst is an emerging text markup language, considered the successor of LaTeX. This project is a Zhejiang University course report template based on Typst, mainly designed for courses such as "Fundamentals of Data Structures (211C0020)" and "Digital Logic Design (211C0060)".
 
-**Reminder**: Due to requirements of some specific courses, disclosing personal information is prohibited and will be punished. So use this project at your own risk.
+**Requirement**: Typst version >= 0.13. It is recommended to use the latest [tinymist](https://github.com/Myriad-Dreamin/tinymist) extension in VS Code for integrated editing and preview.
 
 ## Configuration
 
@@ -22,25 +22,25 @@ Currently, I have provided two themes, corresponding to common lab reports and p
 
 I have configured default fallback options for serif, sans-serif, and monospace fonts, which you can set by modifying `font_serif`, `font_sans_serif`, and `font_mono` parameters.
 
-However, for better rendering experiences, Chineses font families that support arbitrary levels of font weight, such as [Source Han Serif SC](https://github.com/adobe-fonts/source-han-serif/releases/tag/2.002R), is recommanded.
+However, for better rendering experiences, Chinese font families that support arbitrary levels of font weight, such as [Source Han Serif SC](https://github.com/adobe-fonts/source-han-serif/releases/tag/2.002R), are recommended.
 
 ## Features
 
 ### Blocks
 
-We provided a series of block functions to offer an experience that is similar to the callout feature in Obsidian. You can set the theme by modifying the `block_theme` parameter.
+We provide a series of block functions to offer an experience similar to the callout feature in Obsidian. You can set the theme by modifying the `block_theme` parameter.
 
 ```typst
 #note(name: [Lagrange Inversion Theorem])[
-  Given a power serie $F(x)$ and another power series $G(x)$ related by $F(G(x))=G(F(x))=x$, then the nth coefficient of $F(x)$ is
+  Given a power series $F(x)$ and another power series $G(x)$ related by $F(G(x))=G(F(x))=x$, then the n-th coefficient of $F(x)$ is
   $ [x^n] F(x) = 1/n [x^(-1)] 1/(G^n (x)). $
 ]
 ```
 
-Some alias we have provided is as follows: `example`, `proof`, `abstract`, `summary`, `info`, `note`, `tip`, `hint`, `success`, `important`, `help`, `warning`, `attention`, `caution`, `failure`, `danger`, `error`, `bug`, `quote`, `cite`, `experiment`, `question`, `analysis`.
+Some aliases we have provided are as follows: `example`, `proof`, `abstract`, `summary`, `info`, `note`, `tip`, `hint`, `success`, `important`, `help`, `warning`, `attention`, `caution`, `failure`, `danger`, `error`, `bug`, `quote`, `cite`, `experiment`, `question`, `analysis`.
 
 ![themed blocks](./screenshots/themed_blocks.png)
 
 ## Contributing
 
-If you want to submit code to this project, the formatter [typstyle](https://github.com/Enter-tainer/typstyle) is recommended. Please do not contribute unformatted code.
+If you want to submit code to this project, please use the recommended formatter [typstyle](https://github.com/Enter-tainer/typstyle) before submitting. Do not contribute unformatted code.
