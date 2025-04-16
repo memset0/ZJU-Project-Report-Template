@@ -13,6 +13,7 @@
   date: "2025年1月32日", 
   course: "图像信息处理",
   teacher: "sml",
+  grade: "",
   name: "xxxxxxx"
 )
 
