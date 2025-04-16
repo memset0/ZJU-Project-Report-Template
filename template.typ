@@ -140,7 +140,7 @@
   // Cover Page
   if (theme == "lab") {
     v(1fr)
-    align(center, image("./images/ZJU-Banner.png", width: cover_image_size))
+    align(center, image("./images/ZJU-Banner.svg", width: cover_image_size))
     align(center)[
       #set text(size: 26pt)
       #fakebold[本科实验报告]
@@ -220,7 +220,7 @@
         ]
 
         #v(cover_image_padding)
-        #image("./images/ZJU-Logo.png", width: cover_image_size)
+        #image("./images/ZJU-Logo.svg", format: "svg", width: cover_image_size)
         #v(cover_image_padding)
 
         #if (cover_comments == none) [
@@ -398,7 +398,7 @@
       }),
     ),
     (),
-    _underlined_cell("学号：", color: white),
+    _underlined_cell([学$space.quad space.quad$号：], color: white),
     colspanx(
       2,
       _underlined_cell(if school_id == none {
@@ -440,7 +440,7 @@
       column-gutter: (-15pt, 20pt),
       [
         #pad(y: -4pt)[]
-        #image("./images/ZJU-Banner.png", width: 75%)
+        #image("./images/ZJU-Banner.svg", width: 75%)
       ],
       [
         #text(size: -10pt)[] \ #text(size: 30pt, stroke: 1pt)[实验报告]
