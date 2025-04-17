@@ -1,12 +1,12 @@
 #import "@preview/tablex:0.0.9": tablex, colspanx, rowspanx, hlinex, vlinex, cellx
 #import "@preview/showybox:2.0.1": showybox
 
-#let state_course = state("course", none)
-#let state_author = state("author", none)
-#let state_school_id = state("school_id", none)
-#let state_date = state("date", none)
-#let state_theme = state("theme", none)
-#let state_block_theme = state("block_theme", none)
+#let state-course = state("course", none)
+#let state-author = state("author", none)
+#let state-school-id = state("school_id", none)
+#let state-date = state("date", none)
+#let state-theme = state("theme", none)
+#let state-block-theme = state("block_theme", none)
 
 #let _underlined_cell(content, color: black) = {
   tablex(
@@ -229,12 +229,12 @@
   set par(spacing: 1.2em, leading: 0.75em)
 
   // Update global state
-  state_course.update(course)
-  state_author.update(author)
-  state_school_id.update(school_id)
-  state_date.update(date)
-  state_theme.update(theme)
-  state_block_theme.update(block_theme)
+  state-course.update(course)
+  state-author.update(author)
+  state-school-id.update(school_id)
+  state-date.update(date)
+  state-theme.update(theme)
+  state-block-theme.update(block_theme)
 
   // Cover Page
   if (theme == "lab") {
@@ -452,7 +452,7 @@
     colspanx(
       2,
       _underlined_cell(if course == none {
-        context state_course.get()
+        context state-course.get()
       } else {
         course
       }),
@@ -471,7 +471,7 @@
     colspanx(
       2,
       _underlined_cell(if author == none {
-        context state_author.get()
+        context state-author.get()
       } else {
         author
       }),
@@ -481,7 +481,7 @@
     colspanx(
       2,
       _underlined_cell(if school_id == none {
-        context state_school_id.get()
+        context state-school-id.get()
       } else {
         school_id
       }),
@@ -494,7 +494,7 @@
     colspanx(
       2,
       _underlined_cell(if date == none {
-        context state_date.get()
+        context state-date.get()
       } else {
         date
       }),
@@ -545,7 +545,7 @@
     colspanx(
       1,
       _underlined_cell(if course == none {
-        context state_course.get()
+        context state-course.get()
       } else {
         course
       }),
@@ -621,7 +621,7 @@
   context {
     let _theme = theme
     if (_theme == none) {
-      _theme = state_block_theme.get()
+      _theme = state-block-theme.get()
     }
     if (_theme == "default") {
       let _inset = 0.8em
@@ -695,11 +695,8 @@
         width: 100%,
         stroke: 0.5pt + red,
         inset: 1em,
-        radius: 5pt,
-        align(center)[
-          #set text(fill: red, size: 1.5em)
-          Unknown block theme!
-        ],
+        radius: 0.25em,
+        align(center, text(fill: red, size: 1.2em, weight: "bold", [Unknown block theme!])),
       )
     }
   }
