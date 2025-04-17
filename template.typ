@@ -353,6 +353,8 @@
   set par(justify: true)
   set table(align: center + horizon, stroke: 0.5pt)
 
+  show raw.where(block: false): it => box(it, fill: luma(240), stroke: luma(160) + 0.5pt, inset: (left: 0.25em, right: 0.25em), outset: (top: 0.35em, bottom: 0.35em), radius: 0.35em)
+
   set heading(
     numbering: (..args) => {
       let nums = args.pos()
@@ -425,37 +427,6 @@
   } else {
     block(width: 100%, stroke: stroke, radius: radius, inset: inset, raw(lang: lang, block: true, code))
   }
-}
-
-#let importCode(file, namespace: none, lang: "cpp") = {
-  let source_code = read(file)
-  let code = ""
-  let note = ""
-  let flag = false
-  let firstlines = true
-
-  for line in source_code.split("\n") {
-    if namespace != none and line == ("} // namespace " + namespace) {
-      flag = false
-    }
-    if namespace == none or flag {
-      if firstlines and line.starts-with("// ") {
-        note += line.slice(3) + "\n"
-      } else {
-        code += line + "\n"
-        firstlines = false
-      }
-    }
-    if namespace != none and line == ("namespace " + namespace + " {") {
-      flag = true
-    }
-  }
-
-  if note.len() > 0 {
-    block(note)
-  }
-
-  codex(code, lang: lang, size: 1.05em)
 }
 
 #let lab_header(

@@ -38,12 +38,12 @@ Table of test cases. Each test case usually consists of a brief description of t
   columns: (1fr, 1fr),
   align: top,
   inset: 10pt,
-  [`Sample Input`], [`Sample Output`],
+  [Sample Input], [Sample Output],
   [
-    #raw(read("../code/sample.in"))
+    #raw(read("../code/sample.in"), block: true)
   ],
   [
-    #raw(read("../code/sample.out"))
+    #raw(read("../code/sample.out"), block: true)
   ],
 )
 
