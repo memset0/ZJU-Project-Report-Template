@@ -1,4 +1,5 @@
 #import "../../../template.typ": *
+#import "@preview/lovelace:0.3.0": *
 
 #show: project.with(
   theme: "project",
@@ -50,6 +51,20 @@ Table of test cases. Each test case usually consists of a brief description of t
 = *Chapter 4*: Analysis and Comments
 
 Analysis of the time and space complexities of the algorithms. Comments on further possible improvements.
+
+// pseudocode demo, require `lovelace` package
+#pseudocode-list[
+  + do something
+  + *while* still something to do
+    + do even more
+    + *if* not done yet *then*
+      + wait a bit
+      + resume working
+    + *else*
+      + go home
+    + *end*
+  + *end*
+]
 
 = *Appendix*: Source Code (in C)
 
