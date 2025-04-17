@@ -353,6 +353,19 @@
   set par(justify: true)
   set table(align: center + horizon, stroke: 0.5pt)
 
+  set heading(
+    numbering: (..args) => {
+      let nums = args.pos()
+      if nums.len() == 1 {
+        return none
+      } else {
+        return numbering("1.1.", ..nums)
+      }
+    },
+  )
+  show heading: it => block(above: 1.8em, below: 1.2em, it)
+  show heading.where(level: 1): it => block(above: 1.5em, below: 1em, it.body)
+
   if (theme == "lab") {
     set heading(
       numbering: (..args) => {
@@ -362,34 +375,24 @@
         } else if nums.len() == 2 {
           return numbering("一、", ..nums.slice(1))
         } else {
-          return numbering("1.1)", ..nums.slice(1))
+          return numbering("1.1.", ..nums.slice(1))
         }
       },
     )
 
     show heading.where(level: 1): it => block(
       width: 100%,
+      above: 2em,
+      below: 1.5em,
       {
         set align(center)
         set text(size: 1.2em)
-        it.body
-        v(0.6em)
+        it
       },
     )
 
     body
   } else {
-    set heading(
-      numbering: (..args) => {
-        let nums = args.pos()
-        if nums.len() == 1 {
-          return none
-        } else {
-          return numbering("1.1)", ..nums)
-        }
-      },
-    )
-
     body
   }
 }

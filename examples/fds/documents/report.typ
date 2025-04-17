@@ -18,8 +18,16 @@ Problem description and (if any) background of the algorithms.
 Description (pseudo-code preferred) of all the algorithms involved for solving the problem, including specifications of main data structures.
 
 == Step One
+
+#lorem(20)
+
 == Step Two
+
+#lorem(30)
+
 == Step Three // Auto-numbering is supported
+
+#lorem(50)
 
 = *Chapter 3*: Testing Results
 
@@ -30,8 +38,7 @@ Table of test cases. Each test case usually consists of a brief description of t
   columns: (1fr, 1fr),
   align: top,
   inset: 10pt,
-  [`Sample Input`],
-  [`Sample Output`],
+  [`Sample Input`], [`Sample Output`],
   [
     #codex(read("../code/sample.in"), lang: "txt", border: false)
   ],
