@@ -25,7 +25,7 @@
 
 #lorem(100)
 
-#codex(read("./MyMC14495.v"), lang: "verilog")
+#codex(read("./MyMC14495.v"), filename: [*File*: MyMC14495.v], lang: "verilog")
 
 #lab_header(name: "Lab2: 第二次实验", place: "紫金港 东x-xxx", date: "20xx年xx月xx日")
 

@@ -40,10 +40,10 @@ Table of test cases. Each test case usually consists of a brief description of t
   inset: 10pt,
   [`Sample Input`], [`Sample Output`],
   [
-    #codex(read("../code/sample.in"), lang: "txt", border: false)
+    #raw(read("../code/sample.in"))
   ],
   [
-    #codex(read("../code/sample.out"), lang: "txt", border: false)
+    #raw(read("../code/sample.out"))
   ],
 )
 
@@ -55,9 +55,7 @@ Analysis of the time and space complexities of the algorithms. Comments on furth
 
 At least 30% of the lines must be commented. Otherwise the code will NOT be evaluated.
 
-File sol.c:
-
-#codex(read("../code/sol.c"), lang: "c")
+#codex(read("../code/sol.c"), filename: [*File*: sol.c], lang: "c")
 // use `importCode` function to read code from a file
 
 = *Declaration*

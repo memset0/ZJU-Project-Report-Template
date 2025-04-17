@@ -397,24 +397,34 @@
   }
 }
 
-#let codex(code, lang: none, size: 1em, border: true) = {
+#let codex(code, lang: none, filename: none, size: 1em, stroke: 0.5pt + luma(150), inset: 1em, radius: 0.25em) = {
   if code.len() > 0 {
     if code.ends-with("\n") {
       code = code.slice(0, code.len() - 1)
     }
   } else {
-    code = "// no code"
+    code = "// code not found"
   }
+
   set text(size: size)
-  align(left)[
-    #if border == true {
-      block(width: 100%, stroke: 0.5pt + luma(150), radius: 4pt, inset: 8pt)[
-        #raw(lang: lang, block: true, code)
-      ]
-    } else {
-      raw(lang: lang, block: true, code)
-    }
-  ]
+  set align(left)
+  if filename != none {
+    block(
+      width: 100%,
+      stroke: stroke,
+      radius: radius,
+      clip: true,
+      stack(
+        {
+          block(width: 100%, inset: inset, filename)
+        },
+        line(length: 100%, stroke: stroke),
+        block(width: 100%, inset: inset, raw(lang: lang, block: true, code)),
+      ),
+    )
+  } else {
+    block(width: 100%, stroke: stroke, radius: radius, inset: inset, raw(lang: lang, block: true, code))
+  }
 }
 
 #let importCode(file, namespace: none, lang: "cpp") = {
