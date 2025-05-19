@@ -1,5 +1,5 @@
 #import "@preview/tablex:0.0.9": tablex, colspanx, rowspanx, hlinex, vlinex, cellx
-#import "@preview/showybox:2.0.1": showybox
+#import "@preview/showybox:2.0.4": showybox
 
 #let state-course = state("course", none)
 #let state-author = state("author", none)
